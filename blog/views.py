@@ -4,12 +4,14 @@ posts = [
     {
         'author': 'nikita',
         'title': 'post 1',
-        'content': 'content of post 1'
+        'content': 'I love her',
+        'date_posted': "May 18, 2020"
     },
     {
         'author': 'nelly',
         'title': 'post 2',
-        'content': 'hello world'
+        'content': 'I love him',
+        'date_posted': "May 18, 2020"
     }
 ]
 

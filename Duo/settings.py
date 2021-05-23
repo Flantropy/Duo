@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s%t$p9n@=@8avtpbs=_%y!(aq$7o8kdqh2^)@e-4@2b7k%*l2x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('IS_IN_DEBUG')
 
 ALLOWED_HOSTS = ["flantropy.pythonanywhere.com", "127.0.0.1"]
 

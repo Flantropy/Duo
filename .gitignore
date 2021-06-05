@@ -3,6 +3,7 @@ venv/
 blog/static/admin/*
 *.ini
 media/
+posts.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

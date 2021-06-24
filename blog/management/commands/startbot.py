@@ -2,6 +2,7 @@ import logging
 import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from django.core.management.base import BaseCommand
+from blog.models import Post
 
 
 def start(update, context):

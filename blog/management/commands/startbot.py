@@ -3,6 +3,7 @@ import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from django.core.management.base import BaseCommand
 from blog.models import Post
+from random import choice
 
 
 def start(update, context):
@@ -17,6 +18,17 @@ def echo(update, context):
         chat_id=update.effective_chat.id,
         text=update.message.text
     )
+
+
+def get_random_post_content(update, context):
+    o = choice(Post.objects.all())
+    try:
+        context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=o.content
+        )
+    except Exception as e:
+        logging.error(f'exception is {e.__class__} | {e}')
 
 
 class Command(BaseCommand):
@@ -34,8 +46,10 @@ class Command(BaseCommand):
 
         start_handler = CommandHandler('start', start)
         echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+        random_post_handler = CommandHandler('random', get_random_post_content)
         dispatcher.add_handler(start_handler)
         dispatcher.add_handler(echo_handler)
+        dispatcher.add_handler(random_post_handler)
 
         updater.start_polling(poll_interval=5)
         updater.idle()

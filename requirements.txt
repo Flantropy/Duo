@@ -1,6 +1,9 @@
+APScheduler==3.6.3
 asgiref==3.3.4
 boto3==1.17.78
 botocore==1.20.78
+cachetools==4.2.2
+certifi==2021.5.30
 dj-database-url==0.5.0
 Django==3.2.3
 django-crispy-forms==1.11.2
@@ -12,10 +15,13 @@ Pillow==8.2.0
 psycopg2==2.8.6
 python-dateutil==2.8.1
 python-dotenv==0.17.1
+python-telegram-bot==13.6
 pytz==2021.1
 s3transfer==0.4.2
 six==1.16.0
 sqlparse==0.4.1
+tornado==6.1
 typing-extensions==3.10.0.0
+tzlocal==2.1
 urllib3==1.26.4
 whitenoise==5.2.0

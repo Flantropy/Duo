@@ -21,14 +21,25 @@ def echo(update, context):
 
 
 def get_random_post_content(update, context):
-    o = choice(Post.objects.all())
+    random_post = choice(Post.objects.all())
     try:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text=o.content
+            text=random_post.content
         )
     except Exception as e:
         logging.error(f'exception is {e.__class__} | {e}')
+
+
+def get_all_posts(update, context):
+    posts = Post.objects.all()
+    message = f'Total of {Post.objects.count()} posts\n\n'
+    for post in posts:
+        message += f'Title: {post.title} | Author: {post.author} | ID: {post.id}\n\n'
+    context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=message
+    )
 
 
 class Command(BaseCommand):
@@ -50,6 +61,7 @@ class Command(BaseCommand):
         dispatcher.add_handler(start_handler)
         dispatcher.add_handler(echo_handler)
         dispatcher.add_handler(random_post_handler)
+        dispatcher.add_handler(CommandHandler('getall', get_all_posts))
 
         updater.start_polling(poll_interval=5)
         updater.idle()

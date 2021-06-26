@@ -34,11 +34,19 @@ def get_random_post_content(update, context):
 def get_all_posts(update, context):
     posts = Post.objects.all()
     message = f'Total of {Post.objects.count()} posts\n\n'
-    for post in posts:
-        message += f'Title: {post.title} | Author: {post.author} | ID: {post.id}\n\n'
+    for i, post in enumerate(posts):
+        message += f'{i}. Title: {post.title} | Author: {post.author} | ID: {post.id}\n\n'
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=message
+    )
+
+
+def get_post_by_id(update, context):
+    post = Post.objects.get(pk=context.args[0])
+    context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=post.content
     )
 
 
@@ -62,6 +70,7 @@ class Command(BaseCommand):
         dispatcher.add_handler(echo_handler)
         dispatcher.add_handler(random_post_handler)
         dispatcher.add_handler(CommandHandler('getall', get_all_posts))
+        dispatcher.add_handler(CommandHandler('post', get_post_by_id))
 
         updater.start_polling(poll_interval=5)
         updater.idle()

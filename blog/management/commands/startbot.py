@@ -72,5 +72,12 @@ class Command(BaseCommand):
         dispatcher.add_handler(CommandHandler('getall', get_all_posts))
         dispatcher.add_handler(CommandHandler('post', get_post_by_id))
 
-        updater.start_polling(poll_interval=5)
+        # updater.start_polling(poll_interval=5)
+        # my_webhook = os.environ.get('WEBHOOK_URL', '333.eu.ngrok.io')
+        # https://api.telegram.org/bot<token>/setWebhook?url=<url>
+        my_webhook = 'https://65b81fc56da7.ngrok.io'
+        updater.start_webhook(
+            port=8000,
+            webhook_url=my_webhook
+        )
         updater.idle()

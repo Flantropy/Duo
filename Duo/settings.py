@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'storages',
+    'captcha',
 
     'users',
     'blog',
@@ -110,5 +111,10 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = os.environ.get('DEFAULT_FILE_STORAGE')
+
+CAPTCHA_LETTER_ROTATION = (-20, 20)
+CAPTCHA_BACKGROUND_COLOR = '#2F2F30'
+CAPTCHA_FOREGROUND_COLOR = '#FFFFFF'
+CAPTCHA_NOISE_FUNCTIONS = ['captcha.helpers.noise_dots']
 
 django_heroku.settings(locals())

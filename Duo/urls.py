@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
+    path('captcha/', include('captcha.urls')),
     path('profile/', user_views.profile, name='profile'),
     path(
         'login/',

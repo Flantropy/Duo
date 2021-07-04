@@ -6,20 +6,21 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = bool(os.environ.get('IS_IN_DEBUG') == 'True')
-ALLOWED_HOSTS = ["flantropy.pythonanywhere.com", "frootpy.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["frootpy.herokuapp.com", "127.0.0.1"]
 
 INSTALLED_APPS = [
-    'users.apps.UsersConfig',
-    'blog.apps.BlogConfig',
-    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MyDuo.apps.MyduoConfig',
-    'storages'
+
+    'crispy_forms',
+    'storages',
+
+    'users',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -30,8 +31,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
+
 ROOT_URLCONF = 'Duo.urls'
 
 TEMPLATES = [
@@ -108,7 +109,6 @@ AWS_S3_REGION_NAME = "eu-north-1"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
-# TODO  add heroku config:DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
 DEFAULT_FILE_STORAGE = os.environ.get('DEFAULT_FILE_STORAGE')
 
 django_heroku.settings(locals())

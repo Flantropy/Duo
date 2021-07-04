@@ -80,4 +80,5 @@ class Command(BaseCommand):
             port=8000,
             webhook_url=my_webhook
         )
+
         updater.idle()

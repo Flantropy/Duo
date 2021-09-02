@@ -35,7 +35,7 @@ def get_all_posts(update, context):
     posts = Post.objects.all()
     message = f'Total of {Post.objects.count()} posts\n\n'
     for i, post in enumerate(posts):
-        message += f'{i}. Title: {post.title} | Author: {post.author} | ID: {post.id}\n\n'
+        message += f'{i+1}. Title: {post.title} | Author: {post.author} | ID: {post.id}\n\n'
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=message
@@ -59,6 +59,7 @@ class Command(BaseCommand):
 
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
+        
         auth_token = os.environ.get('BOT_TOKEN')
         updater = Updater(token=auth_token)
         dispatcher = updater.dispatcher
@@ -66,19 +67,20 @@ class Command(BaseCommand):
         start_handler = CommandHandler('start', start)
         echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
         random_post_handler = CommandHandler('random', get_random_post_content)
+        
         dispatcher.add_handler(start_handler)
         dispatcher.add_handler(echo_handler)
         dispatcher.add_handler(random_post_handler)
         dispatcher.add_handler(CommandHandler('getall', get_all_posts))
         dispatcher.add_handler(CommandHandler('post', get_post_by_id))
 
-        # updater.start_polling(poll_interval=5)
+        updater.start_polling(poll_interval=5)
         # my_webhook = os.environ.get('WEBHOOK_URL', '333.eu.ngrok.io')
         # https://api.telegram.org/bot<token>/setWebhook?url=<url>
-        my_webhook = 'https://65b81fc56da7.ngrok.io'
-        updater.start_webhook(
-            port=8000,
-            webhook_url=my_webhook
-        )
+        # my_webhook = 'https://65b81fc56da7.ngrok.io'
+        # updater.start_webhook(
+        #     port=8000,
+        #     webhook_url=my_webhook
+        # )
 
         updater.idle()

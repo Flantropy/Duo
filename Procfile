@@ -1,4 +1,3 @@
 release: python manage.py migrate
 web: gunicorn Duo.wsgi
-
-# TODO: add process for bot
+bot: python3 telegram_bot/run.py

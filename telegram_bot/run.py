@@ -4,7 +4,8 @@ from os import getenv
 from telegram.ext import (CommandHandler, Dispatcher, Updater)
 
 from telegram_bot.commands import (
-    start
+    start,
+    get_all_posts,
 )
 
 
@@ -23,6 +24,7 @@ def run_bot():
     
     # Adding Handlers
     dispatcher.add_handler(CommandHandler('start', start))
+    dispatcher.add_handler(CommandHandler('posts', get_all_posts))
     
     # Start Polling
     updater.start_polling(poll_interval=5)

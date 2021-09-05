@@ -6,6 +6,7 @@ from telegram.ext import (CommandHandler, Dispatcher, Updater)
 from telegram_bot.commands import (
     start,
     get_all_posts,
+    get_post_by_id,
 )
 
 
@@ -25,6 +26,7 @@ def run_bot():
     # Adding Handlers
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('posts', get_all_posts))
+    dispatcher.add_handler(CommandHandler('post', get_post_by_id))
     
     # Start Polling
     updater.start_polling(poll_interval=5)
